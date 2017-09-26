@@ -1,12 +1,17 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
+#include <stdlib.h>
 
-#define MAX_PASSWORD_LEN	32
+#define _GNU_SOURCE
+#include <crypt.h>
+
+#define MAX_PASSWORD_LEN    64
 
 int main()
 {
 	char password[MAX_PASSWORD_LEN];
+	char *encr_pass;
 	char *c;
 
 	while(fgets(password, MAX_PASSWORD_LEN, stdin) != NULL)
@@ -17,8 +22,11 @@ int main()
 			*c = 0;
 			c--;
 		}
-		printf("%s\n", password);
+
+		encr_pass = crypt(password, "$1$abcdefg/");
+		printf("%s, %s\n", password, encr_pass);
 	}
+	free(encr_pass);
 
 	return 0;
 }
