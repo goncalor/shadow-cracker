@@ -11,7 +11,7 @@
 int main()
 {
 	char password[MAX_PASSWORD_LEN];
-	char *encr_pass;
+	char *encr_pass = NULL;
 	char *c;
 
 	while(fgets(password, MAX_PASSWORD_LEN, stdin) != NULL)
@@ -24,9 +24,17 @@ int main()
 		}
 
 		encr_pass = crypt(password, "$1$abcdefg/");
+		// check return value
 		printf("%s, %s\n", password, encr_pass);
+		if(strcmp(encr_pass + strlen("$1$abcdefg/") + 1, "suq287zk65PfH155HSD.R0") == 0)
+		{
+			printf("Found a password for %s: %s\n", encr_pass, password);
+			exit(0);
+		}
 	}
-	free(encr_pass);
+
+	if(encr_pass != NULL)
+		free(encr_pass);
 
 	return 0;
 }
