@@ -20,7 +20,7 @@ int main(int argc, char **argv)
 	}
 
 	int ret;
-	int id;
+	int id; // this should be a string (ID 2a for example)
 	char salt[64], hash[128];
 	// TODO: fix this horrible buffer overflow
 	ret = sscanf(argv[1], "$%d$%[^$]$%s", &id, salt, hash);
