@@ -26,6 +26,7 @@ int main()
 		encr_pass = crypt(password, "$1$abcdefg/");
 		// check return value
 		printf("%s, %s\n", password, encr_pass);
+		// the returned string is of the form $id$salt$hash
 		if(strcmp(encr_pass + strlen("$1$abcdefg/") + 1, "suq287zk65PfH155HSD.R0") == 0)
 		{
 			printf("Found a password for %s: %s\n", encr_pass, password);
